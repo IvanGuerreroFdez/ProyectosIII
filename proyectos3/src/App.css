@@ -1,38 +1,141 @@
-.App {
+body{
+  background-image: url(sportwave.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  height: 100vh;
+}
+
+/*Tamaño ordenador*/
+.menuDesplegable{
+  background: #1e1c61;
+  
+}
+
+.botonMenu{
+  display: none;
+}
+
+ul{
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+}
+
+li{
+  list-style: none;
+}
+
+nav a{
+  color: white;
+  text-decoration: none;
+  text-align: center;
+  font-size: 1.1rem;
+  padding: 10px;
+  display: block;
+}
+
+ul li a:hover{
+  background: grey;
+}
+.descripcion{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+/* Estilos de la caja de descripción */
+.caja-descripcion {
+  background-color: white;
+  color: black;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.caja-descripcion h1 {
+  margin: 0;
+  font-size: 24px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+.caja-descripcion p {
+  margin-top: 10px;
+  font-size: 16px;
+}
+/*Tamaño responsive*/
+@media(max-width: 850px){
+  .boton1{
+    background-color:black;
+    display: block;
+  }
+  .menuDesplegable{
+    transform: translate(-100%);
+    transition: 0.5s;
+    font-size: 1.5rem;
+    width: 50%;
+    background: rgba(30, 30, 30, 0.5);
+    backdrop-filter: blur(2px);
+  }
+  i{
+    font-size: 30px;
+    background: #1e1e1e;
+    color: white;
+  }
+  li a{
+    padding: 20px 0px 20px 20px;
+    display: block;
+    text-align: left;
+  }
+  ul{
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  button{
+    margin: 10px 10px 10px 20px;;
+    border: none;
+  }
+  .botonMenu{
+    background-image: url('iconoMenu.png');
+    background-color: black;
+    background-repeat: no-repeat;
+    height: 30px;
+    width: 30px;
+    background-size: 30px 30px;
+    background-position: center;
+  }
+  .abrirMenu{
+    transform: translate(0%);
+    transition: 0.5s;
+    width: 50%;
+    background: rgba(30, 30, 30, 0.6);
+    backdrop-filter: blur(2px);
+  }
+  .cerrarMenu{
+    background-image: url('iconoSalirMenu.png');
+    background-color: black;
+    background-repeat: no-repeat;
+    height: 30px;
+    width: 30px;
+    background-size: 30px 30px;
+    background-position: center;
   }
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+@media(max-width: 500px){
+  .menuDesplegable{
+    width: 100%;
+    height: 100vh;
+    font-size: 1.6rem;
   }
-  to {
-    transform: rotate(360deg);
-  }
+  button{
+    margin: 10px 10px 10px 15px;
+  } 
 }
+
