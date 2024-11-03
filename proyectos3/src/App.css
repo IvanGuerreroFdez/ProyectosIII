@@ -7,9 +7,23 @@ body{
 }
 
 /*Tamaño ordenador*/
-.menuDesplegable{
+.menuDesplegable {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px; /* Espaciado opcional */
   background: #1e1c61;
-  
+}
+
+
+.menuLeft,
+.menuRight {
+  display: flex;
+  gap: 10px; /* Ajusta el espacio entre los elementos */
+}
+
+.menuRight {
+  margin-left: auto; /* Empuja la sección derecha hacia la derecha */
 }
 
 .botonMenu{

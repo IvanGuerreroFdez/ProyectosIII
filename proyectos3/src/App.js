@@ -15,9 +15,13 @@ function App() {
           <button onClick={abrirMenu} className='botonMenu' id='botonesMenu'> </button>
         </div>
         <nav id='menu' className='menuDesplegable'>
-          <ul>
+          <ul className="menuLeft">
             <li><a href={vacio}>Inicio</a></li>
             <li><a href={vacio}>Eventos</a></li>
+            <li><a href={vacio}>Calendario</a></li>
+          </ul>
+
+          <ul className="menuRight">
             <li><a href={vacio}>Inicio Sesión</a></li>
             <li><a href={vacio}>Registrarse</a></li>
           </ul>
