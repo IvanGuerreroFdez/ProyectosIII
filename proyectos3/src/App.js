@@ -1,5 +1,10 @@
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import Eventos from './components/Eventos';
+import React from 'react';
+import HomePage from './components/HomePage';
 import './App.css';
-let vacio = '';
+
+/*let vacio = '';*/
 
 function App() {
   const abrirMenu = ()=>{
@@ -8,35 +13,32 @@ function App() {
     menuDesplegable.classList.toggle('abrirMenu');
     botonCerrar.classList.toggle('cerrarMenu');
   }
+
   return (
-    <>
+    <Router>
       <header>
         <div id='boton1'>
           <button onClick={abrirMenu} className='botonMenu' id='botonesMenu'> </button>
         </div>
         <nav id='menu' className='menuDesplegable'>
           <ul className="menuLeft">
-            <li><a href={vacio}>Inicio</a></li>
-            <li><a href={vacio}>Eventos</a></li>
-            <li><a href={vacio}>Calendario</a></li>
+            <li><Link to="/">Inicio</Link></li>
+            <li><Link to="/eventos">Eventos</Link></li>
+            <li><Link to="/calendario">Calendario</Link></li>
           </ul>
 
           <ul className="menuRight">
-            <li><a href={vacio}>Inicio Sesión</a></li>
-            <li><a href={vacio}>Registrarse</a></li>
+            <li><Link to="/login">Inicio Sesión</Link></li>
+            <li><Link to="/register">Registrarse</Link></li>
           </ul>
         </nav>
-      </header>   
-      <div className="descripcion">
-      <div className="caja-descripcion">
-        <h1>¡Bienvenidos a SportWave!</h1>
-        <p>
-          descripcion de quienes somos y de que va el proyecto
-        </p>
-      </div>
-    </div>
-    </> 
+      </header>
+
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/eventos" element={<Eventos />} />
+      </Routes>
+    </Router>
   );
 }
-
 export default App;

@@ -3,6 +3,7 @@ body{
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
+  background-attachment: fixed;
   height: 100vh;
 }
 
@@ -14,7 +15,6 @@ body{
   padding: 0 20px; /* Espaciado opcional */
   background: #1e1c61;
 }
-
 
 .menuLeft,
 .menuRight {
@@ -53,33 +53,7 @@ nav a{
 ul li a:hover{
   background: grey;
 }
-.descripcion{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-}
 
-/* Estilos de la caja de descripción */
-.caja-descripcion {
-  background-color: white;
-  color: black;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-  max-width: 600px;
-  text-align: center;
-}
-
-.caja-descripcion h1 {
-  margin: 0;
-  font-size: 24px;
-}
-
-.caja-descripcion p {
-  margin-top: 10px;
-  font-size: 16px;
-}
 /*Tamaño responsive*/
 @media(max-width: 850px){
   .boton1{

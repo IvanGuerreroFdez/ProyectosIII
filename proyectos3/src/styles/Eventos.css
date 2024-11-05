@@ -1,0 +1,82 @@
+/* Contenedor principal para eventos */
+.eventos-container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 800px;
+    width: 90%;
+    margin: 20px auto;
+}
+
+/* Estilos del título principal */
+.eventos-container h2 {
+    text-align: center;
+    color: #333;
+}
+
+/* Estilos para cada tarjeta de evento */
+.evento-card {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.evento-card h3 {
+    margin-top: 0;
+    color: #222;
+}
+
+.evento-card p {
+color: #555;    
+}
+
+.evento-card button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.evento-card button:hover {
+    background-color: #45a049;  
+}
+
+/* Estilos para el formulario de creación de eventos */
+.crear-evento {
+    margin-top: 20px;
+}
+
+.crear-evento h3 {
+    color: #333;
+}
+
+.crear-evento input,
+.crear-evento textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.crear-evento button {
+    background-color: #2196F3;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.crear-evento button:hover {
+    background-color: #0b7dda;
+}
+  
