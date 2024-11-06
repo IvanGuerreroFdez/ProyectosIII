@@ -2,6 +2,8 @@ import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import Eventos from './components/Eventos';
 import React from 'react';
 import HomePage from './components/HomePage';
+import Login from './components/Login';
+import Registro from './components/Registro';
 import './App.css';
 
 /*let vacio = '';*/
@@ -37,6 +39,8 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/eventos" element={<Eventos />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Registro />} />
       </Routes>
     </Router>
   );
