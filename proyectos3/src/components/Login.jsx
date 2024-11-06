@@ -1,48 +1,52 @@
+// Login.jsx
 import React, { useState } from 'react';
 import '../styles/Login.css';
+import Cookies from 'js-cookie';
+import { useNavigate, Link } from 'react-router-dom';
 
 const Login = () => {
-  const [userCredentials, setUserCredentials] = useState({ username: '', password: '' });
-  const [message, setMessage] = useState('');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+  const navigate = useNavigate();
 
-  const handleChange = (e) => {
-    setUserCredentials({ ...userCredentials, [e.target.name]: e.target.value });
-  };
+  const handleLogin = (e) => {
+    e.preventDefault();
+    const users = Cookies.get('users') ? JSON.parse(Cookies.get('users')) : [];
+    const user = users.find((user) => user.username === username && user.password === password);
 
-  const handleLogin = () => {
-    const { username, password } = userCredentials;
-    
-    if (username === 'admin' && password === 'admin') {
-      setMessage('Login exitoso');
+    if (user) {
+      Cookies.set('user', JSON.stringify(user), { expires: 7 });
+      navigate('/perfil'); 
     } else {
-      setMessage('Usuario o contraseña incorrectos');
+      setErrorMessage('Credenciales incorrectas');
     }
   };
 
   return (
     <div className="login-container">
-      <h2>Iniciar Sesión</h2>
-      
-      <div className="login-form">
+      <h2>Inicio de Sesión</h2>
+      <form onSubmit={handleLogin} className="login-form">
         <input
           type="text"
-          name="username"
           placeholder="Nombre de usuario"
-          value={userCredentials.username}
-          onChange={handleChange}
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          required
         />
         <input
           type="password"
-          name="password"
           placeholder="Contraseña"
-          value={userCredentials.password}
-          onChange={handleChange}
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
         />
-        <button onClick={handleLogin}>Iniciar Sesión</button>
-        
-        {/* Muestra el mensaje de éxito o error */}
-        {message && <p className="login-message">{message}</p>}
-      </div>
+        <button type="submit">Iniciar Sesión</button>
+        {errorMessage && <p className="login-message error">{errorMessage}</p>}
+      </form>
+      <p className="create-account">
+        ¿No tienes una cuenta? <Link to="/register">¡Crea una nueva cuenta!</Link>
+      </p>
     </div>
   );
 };

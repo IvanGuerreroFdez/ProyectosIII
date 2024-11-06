@@ -1,112 +1,97 @@
-// Registro.js
+// Registro.jsx
 import React, { useState } from 'react';
+import Cookies from 'js-cookie';
+import { useNavigate } from 'react-router-dom';
 import '../styles/Registro.css';
 
 const Registro = () => {
-  const [userDetails, setUserDetails] = useState({
-    username: '',
-    password: '',
-    email: '',
-    city: '',
-    interests: {
-      futbol: false,
-      baloncesto: false,
-      tenis: false,
-      otros: false,
-    },
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [city, setCity] = useState('');
+  const [interests, setInterests] = useState({
+    futbol: false,
+    baloncesto: false,
+    tenis: false,
+    otros: false,
   });
-  const [message, setMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
+  const navigate = useNavigate();
 
-  const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    if (type === 'checkbox') {
-      setUserDetails({
-        ...userDetails,
-        interests: {
-          ...userDetails.interests,
-          [name]: checked,
-        },
-      });
-    } else {
-      setUserDetails({
-        ...userDetails,
-        [name]: value,
-      });
-    }
+  const handleRegister = (e) => {
+    e.preventDefault();
+
+    const newUser = {
+      username,
+      email,
+      password,  
+      city,
+      interests,
+    };
+
+    const users = Cookies.get('users') ? JSON.parse(Cookies.get('users')) : [];
+    users.push(newUser);
+    Cookies.set('users', JSON.stringify(users), { expires: 7 });
+
+    setSuccessMessage('Registro exitoso. Redirigiendo a inicio de sesión...');
+    setTimeout(() => navigate('/login'), 2000);
   };
 
-  const handleRegister = () => {
-    const { username, password, email, city, interests } = userDetails;
-
-    // Convertimos los intereses seleccionados en una lista de texto
-    const selectedInterests = Object.keys(interests)
-      .filter((key) => interests[key])
-      .join(', ');
-
-    // Creamos un mensaje con los datos del formulario
-    const registrationMessage = `
-      Nombre de usuario: ${username}
-      Contraseña: ${password}
-      Correo: ${email}
-      Ciudad: ${city}
-      Intereses: ${selectedInterests || 'Ninguno'}
-    `;
-
-    setMessage(registrationMessage);
+  const handleInterestChange = (e) => {
+    const { name, checked } = e.target;
+    setInterests({ ...interests, [name]: checked });
   };
 
   return (
     <div className="registro-container">
-      <h2>Registro de Usuario</h2>
-      
-      <div className="registro-form">
+      <h2>Registro</h2>
+      <form onSubmit={handleRegister} className="registro-form">
         <input
           type="text"
-          name="username"
           placeholder="Nombre de usuario"
-          value={userDetails.username}
-          onChange={handleChange}
-        />
-        <input
-          type="password"
-          name="password"
-          placeholder="Contraseña"
-          value={userDetails.password}
-          onChange={handleChange}
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          required
         />
         <input
           type="email"
-          name="email"
           placeholder="Correo electrónico"
-          value={userDetails.email}
-          onChange={handleChange}
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+        <input
+          type="password"
+          placeholder="Contraseña"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
         />
         <input
           type="text"
-          name="city"
           placeholder="Ciudad"
-          value={userDetails.city}
-          onChange={handleChange}
+          value={city}
+          onChange={(e) => setCity(e.target.value)}
+          required
         />
 
-        {/* Título para los intereses */}
-        <h4>Intereses:</h4>
+        <h4>Intereses</h4>
         <div className="interests">
           <label>
             <input
               type="checkbox"
               name="futbol"
-              checked={userDetails.interests.futbol}
-              onChange={handleChange}
+              checked={interests.futbol}
+              onChange={handleInterestChange}
             />
-            Futbol
+            Fútbol
           </label>
           <label>
             <input
               type="checkbox"
               name="baloncesto"
-              checked={userDetails.interests.baloncesto}
-              onChange={handleChange}
+              checked={interests.baloncesto}
+              onChange={handleInterestChange}
             />
             Baloncesto
           </label>
@@ -114,8 +99,8 @@ const Registro = () => {
             <input
               type="checkbox"
               name="tenis"
-              checked={userDetails.interests.tenis}
-              onChange={handleChange}
+              checked={interests.tenis}
+              onChange={handleInterestChange}
             />
             Tenis
           </label>
@@ -123,22 +108,16 @@ const Registro = () => {
             <input
               type="checkbox"
               name="otros"
-              checked={userDetails.interests.otros}
-              onChange={handleChange}
+              checked={interests.otros}
+              onChange={handleInterestChange}
             />
             Otros
           </label>
         </div>
 
-        <button onClick={handleRegister}>Registrarse</button>
-
-        {message && (
-          <div className="registro-message">
-            <h3>Datos de Registro</h3>
-            <pre>{message}</pre>
-          </div>
-        )}
-      </div>
+        <button type="submit">Registrarse</button>
+        {successMessage && <p className="registro-message">{successMessage}</p>}
+      </form>
     </div>
   );
 };
