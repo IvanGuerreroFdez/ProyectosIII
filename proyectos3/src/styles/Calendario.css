@@ -1,0 +1,72 @@
+/* Contenedor principal */
+.calendario-container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 800px;
+    width: 90%;
+    margin: 20px auto;
+}
+
+/* Título principal */
+.calendario-container h2 {
+    text-align: center;
+    color: #333;
+    font-size: 2em;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* Estilos para el calendario */
+.calendario {
+    display: block;
+    width: 100%; /* Ocupa todo el ancho disponible */
+    max-width: 760px; /* Límite del tamaño máximo */
+    margin: 0 auto; /* Centra horizontalmente el calendario */
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
+    font-size: 1.2em; /* Tamaño de fuente aumentado */
+}
+
+/* Celdas del calendario */
+.calendario table {
+    width: 100%; /* Asegura que la tabla ocupe todo el ancho */
+    border-collapse: collapse;
+}
+
+.calendario th, .calendario td {
+    text-align: center;
+    padding: 10px;
+    border: 1px solid #ccc;
+    font-size: 1em;
+}
+
+.calendario th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+    color: #555;
+}
+
+/* Días activos */
+.calendario td.active {
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 50%;
+    transition: background-color 0.3s;
+}
+
+.calendario td.active:hover {
+    background-color: #45a049;
+}
+
+/* Texto debajo del calendario */
+.calendario-eventos {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 1.2em;
+    color: #333;
+}
