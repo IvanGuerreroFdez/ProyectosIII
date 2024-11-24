@@ -8,6 +8,7 @@ import Registro from './components/Registro';
 import Perfil from './components/Perfil';
 import RequireAuth from './components/RequireAuth';
 import Cookies from 'js-cookie';
+import Calendario from './components/Calendario';
 import './App.css';
 
 function App() {
@@ -78,9 +79,10 @@ function App() {
           path="/calendario"
           element={
             <RequireAuth>
-              <Perfil />
+              <Calendario />
             </RequireAuth>
           }
+        
         />
       </Routes>
     </Router>
