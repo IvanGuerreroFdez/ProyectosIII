@@ -17,6 +17,7 @@
 
 /* Estilos para cada tarjeta de evento */
 .evento-card {
+    position: relative; 
     background-color: #f9f9f9;
     border: 1px solid #ddd;
     border-radius: 8px;
@@ -34,19 +35,19 @@
 color: #555;    
 }
 
-.evento-card button {
-    background-color: #4CAF50;
+/* .evento-card button {
+    background-color: red;
     color: white;
     border: none;
     padding: 8px 16px;
     border-radius: 5px;
     cursor: pointer;
     margin-top: 10px;
-}
+} */
 
-.evento-card button:hover {
-    background-color: #45a049;  
-}
+/* .evento-card button:hover {
+    background-color: darkred;  
+} */
 
 /* Estilos para el formulario de creación de eventos */
 .crear-evento {
@@ -63,7 +64,7 @@ color: #555;
     padding: 10px;
     margin: 5px 0;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 5px
 }
 
 .crear-evento button {
@@ -79,4 +80,74 @@ color: #555;
 .crear-evento button:hover {
     background-color: #0b7dda;
 }
+
+.crear-evento input[type="date"] {
+    font-size: 16px;
+}
+
+.eliminar-evento {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    padding: 0;
+}
   
+.eliminar-evento:hover {
+    background-color: darkred;
+}
+
+.completar-evento {
+    position: absolute;
+    top: 10px;
+    right: 45px; /* Espaciado desde el botón de eliminar */
+    background-color: green;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+  
+.completar-evento:hover {
+    background-color: darkgreen;
+}
+  
+.evento-controles {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    gap: 5px;
+}
+ 
+.salir-unirse button{
+    background-color: green;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 2.5px;
+    cursor: pointer;
+    margin-top: 5px;
+}
+
+.salir-unirse button:hover {
+    background-color: darkgreen;
+}

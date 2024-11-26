@@ -6,16 +6,15 @@ import '../styles/Calendario.css';
 
 const Calendario = () => {
   const [fechaSeleccionada, setFechaSeleccionada] = useState(new Date());
-  const [eventosInscritos, setEventosInscritos] = useState([]);
+  const [eventosCalendario, setEventosCalendario] = useState([]);
 
   useEffect(() => {
-    const inscritos = Cookies.get('eventosInscritos');
-    setEventosInscritos(inscritos ? JSON.parse(inscritos) : []);
+    const calendarioGuardado = Cookies.get('calendario');
+    setEventosCalendario(calendarioGuardado ? JSON.parse(calendarioGuardado) : []);
   }, []);
 
-  const eventosEnFecha = eventosInscritos.filter((evento) => {
-    // Simulamos que todos los eventos tienen fecha de hoy por defecto
-    return new Date(evento.fecha || new Date()).toDateString() === fechaSeleccionada.toDateString();
+  const eventosEnFecha = eventosCalendario.filter((evento) => {
+    return new Date(evento.fecha).toDateString() === fechaSeleccionada.toDateString();
   });
 
   return (
@@ -33,6 +32,7 @@ const Calendario = () => {
           eventosEnFecha.map((evento) => (
             <div key={evento.id} className="evento-card">
               <h4>{evento.titulo}</h4>
+              <p><strong>Ubicación:</strong> {evento.ubicacion}</p>
               <p>{evento.descripcion}</p>
             </div>
           ))
