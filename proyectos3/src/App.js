@@ -1,4 +1,3 @@
-// App.js
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import Eventos from './components/Eventos';
 import React, { useEffect, useState } from 'react';
@@ -13,10 +12,21 @@ import './App.css';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [eventos, setEventos] = useState([]); // Estado global para eventos
 
+  // Cargar autenticaciÃ³n y eventos
   useEffect(() => {
     const user = Cookies.get('user');
     setIsAuthenticated(!!user);
+
+    const eventosGuardados = Cookies.get('eventos');
+    try {
+      const parsedEventos = eventosGuardados ? JSON.parse(eventosGuardados) : [];
+      setEventos(parsedEventos);
+    } catch (error) {
+      console.error('Error al cargar eventos:', error);
+      setEventos([]);
+    }
   }, []);
 
   const abrirMenu = () => {
@@ -29,10 +39,10 @@ function App() {
   return (
     <Router>
       <header>
-        <div id='boton1'>
-          <button onClick={abrirMenu} className='botonMenu' id='botonesMenu'> </button>
+        <div id="boton1">
+          <button onClick={abrirMenu} className="botonMenu" id="botonesMenu"> </button>
         </div>
-        <nav id='menu' className='menuDesplegable'>
+        <nav id="menu" className="menuDesplegable">
           <ul className="menuLeft">
             <li><Link to="/">Inicio</Link></li>
             <li><Link to="/eventos">Eventos</Link></li>
@@ -45,18 +55,13 @@ function App() {
                 Perfil
               </Link>
             </li>
-            {/* {!isAuthenticated && (
-              <>
-                <li><Link to="/login">Inicio Sesión</Link></li>
-                <li><Link to="/register">Registrarse</Link></li>
-              </>
-            )} */}
           </ul>
         </nav>
       </header>
 
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        {/* Pasa los eventos como prop a HomePage */}
+        <Route path="/" element={<HomePage eventos={eventos} />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Registro />} />
         <Route
@@ -82,7 +87,6 @@ function App() {
               <Calendario />
             </RequireAuth>
           }
-        
         />
       </Routes>
     </Router>

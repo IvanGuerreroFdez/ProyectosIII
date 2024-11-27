@@ -1,28 +1,82 @@
-.descripcion{
+.home-container {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
+    justify-content: center; /* Centrar horizontalmente */
+    align-items: center; /* Centrar verticalmente */
+    padding: 20px;
+    min-height: 100vh; /* Asegura que ocupe toda la altura de la pantalla */
+    position: relative;
 }
 
-.caja-descripcion {
-    background-color: white;
-    color: black;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+.descripcion {
+    background-color: #ffffff; /* Fondo blanco elegante */
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1); /* Sombra más prominente */
     max-width: 600px;
-    text-align: center;
+    text-align: justify; /* Justificación para el texto */
+    z-index: 1; /* Asegura que esté sobre otros elementos */
+    border: 1px solid #d6d6d6; /* Borde sutil */
+    background-image: linear-gradient(to bottom, #f9f9f9, #ffffff); /* Fondo con un degradado ligero */
 }
 
 .caja-descripcion h1 {
-    margin: 0;
-    font-size: 24px;
-    }
-
-.caja-descripcion p {
-    margin-top: 10px;
-    font-size: 16px;
+    font-size: 28px;
+    font-weight: bold;
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 15px;
 }
 
-.home-container {}
+.caja-descripcion p {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #444;
+}
+
+/* Caja de eventos populares */
+.eventos-populares {
+    position: absolute; /* Se posiciona en el lado izquierdo de la página */
+    top: 50%; /* Centrar verticalmente */
+    left: 20px; /* Espaciado desde el borde izquierdo */
+    transform: translateY(-50%); /* Ajuste para centrar perfectamente */
+    background-color: #f0f8ff; /* Azul claro sutil */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15); /* Sombra más prominente */
+    max-width: 250px;
+    text-align: justify; /* Justificación del texto */
+    border: 1px solid #b0c4de; /* Borde azul claro */
+}
+
+.eventos-populares h3 {
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+.eventos-populares ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.evento-item {
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: #333;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+}
+
+.evento-item:hover {
+    background-color: #e6f7ff; /* Azul claro al pasar el mouse */
+    color: #1e88e5;
+    cursor: pointer;
+}
+
+.evento-item:last-child {
+    border-bottom: none; /* Eliminar el borde del último elemento */
+}
