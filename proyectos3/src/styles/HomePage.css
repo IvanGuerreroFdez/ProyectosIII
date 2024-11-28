@@ -60,15 +60,17 @@
     list-style: none;
     padding: 0;
     margin: 0;
+    display: flex;
+    flex-direction: column; /* Asegura que los elementos estén uno encima del otro */
+    gap: 10px; /* Espacio entre cada elemento de la lista */
 }
 
 .evento-item {
     font-size: 16px;
-    margin-bottom: 10px;
-    color: #333;
-    transition: background-color 0.3s ease, color 0.3s ease;
-    border-bottom: 1px solid #ddd;
-    padding-bottom: 10px;
+    padding: 10px; /* Añade espacio interior para una mejor apariencia */
+    margin: 0; /* Asegúrate de eliminar cualquier margen que pudiera superponerse */
+    border-radius: 5px; /* Bordes redondeados para cada item */
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* Sombra sutil para cada evento */
 }
 
 .evento-item:hover {
@@ -80,3 +82,4 @@
 .evento-item:last-child {
     border-bottom: none; /* Eliminar el borde del último elemento */
 }
+
