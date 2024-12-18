@@ -1,72 +1,116 @@
 /* Contenedor principal */
 .calendario-container {
-    background-color: white;
-    padding: 20px;
+    background-color: rgb(255, 255, 255);
+    width: 85%;
+    margin: 30px auto;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 10px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    max-width: 800px;
-    width: 90%;
-    margin: 20px auto;
 }
 
-/* Título principal */
-.calendario-container h2 {
-    text-align: center;
-    color: #333;
-    font-size: 2em;
-    font-weight: bold;
-    margin-bottom: 20px;
-}
-
-/* Estilos para el calendario */
+/* Calendario */
 .calendario {
-    display: block;
-    width: 100%; /* Ocupa todo el ancho disponible */
-    max-width: 760px; /* Límite del tamaño máximo */
-    margin: 0 auto; /* Centra horizontalmente el calendario */
-    padding: 20px;
-    border: 1px solid #ddd;
+    flex: 0 0 50%; /* Mantiene el ancho ajustado */
+    padding: 10px;
+    background-color: #f9f9f9;
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    background-color: #f9f9f9;
-    font-size: 1.2em; /* Tamaño de fuente aumentado */
 }
 
-/* Celdas del calendario */
-.calendario table {
-    width: 100%; /* Asegura que la tabla ocupe todo el ancho */
-    border-collapse: collapse;
+.calendario .react-calendar {
+    width: 100%;
+    max-width: 100%;
+    font-family: Arial, sans-serif;
+    border: none;
 }
 
-.calendario th, .calendario td {
-    text-align: center;
-    padding: 10px;
-    border: 1px solid #ccc;
+/* Encabezado del calendario */
+.calendario .react-calendar__navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.calendario .react-calendar__navigation button {
+    background: none;
+    border: none;
     font-size: 1em;
+    cursor: pointer;
+    color: #333;
 }
 
-.calendario th {
-    background-color: #f4f4f4;
+.calendario .react-calendar__navigation button:hover {
+    background-color: #ddd;
+    border-radius: 5px;
+}
+
+/* Días de la semana */
+.calendario .react-calendar__month-view__weekdays {
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 0.9em;
     font-weight: bold;
     color: #555;
+    margin-bottom: 10px;
 }
 
-/* Días activos */
-.calendario td.active {
-    background-color: #4CAF50;
-    color: white;
-    border-radius: 50%;
-    transition: background-color 0.3s;
-}
-
-.calendario td.active:hover {
-    background-color: #45a049;
-}
-
-/* Texto debajo del calendario */
-.calendario-eventos {
-    margin-top: 20px;
+/* Días del mes */
+.calendario .react-calendar__tile {
     text-align: center;
-    font-size: 1.2em;
+    height: 70px; /* Más alto */
+    padding: 12px; /* Espacio extra */
+    font-size: 1em;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+}
+
+.calendario .react-calendar__tile--active {
+    background-color: #002aff;
+    color: white;
+}
+
+.calendario .react-calendar__tile--now {
+    background-color: #f4f4f4;
+    font-weight: bold;
+}
+
+.calendario .react-calendar__tile:hover {
+    background-color: #002aff;
+}
+
+/* Contenedor de eventos */
+.eventos-en-fecha {
+    flex: 0 0 45%;
+    padding: 20px;
+    font-size: 1.3em;
     color: #333;
+    background-color: #f4f4f4;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    overflow-y: auto; /* Scroll si el contenido excede */
+}
+
+.eventos-en-fecha h3 {
+    margin-bottom: 10px;
+    font-size: 1.6em;
+}
+
+.eventos-en-fecha .evento-card {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #fff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.eventos-en-fecha .evento-card:hover {
+    background-color: #f9f9f9;
 }
