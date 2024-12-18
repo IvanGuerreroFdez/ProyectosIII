@@ -1,0 +1,144 @@
+/* Contenedor principal del perfil */
+.perfil-container {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 128, 0, 0.2);
+    max-width: 600px;
+    width: 90%;
+    margin: 30px auto;
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    border: 3px solid #28a745;
+}
+
+/* Imagen del perfil y placeholder */
+.profile-pic, .profile-pic-placeholder {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 3px solid #28a745;
+    object-fit: cover;
+    margin: 0 auto 15px;
+}
+
+.profile-pic-placeholder {
+    background-color: #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    color: #666;
+}
+
+/* Contenedor de Intereses */
+.interests {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.interests ul {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+}
+
+.interests li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    font-size: 14px;
+    min-width: 100px;
+    color: #333;
+}
+
+.interests li:hover {
+    background-color: #e9f9e9;
+    border-color: #28a745;
+    box-shadow: 0 0 5px rgba(40, 167, 69, 0.3);
+}
+
+.interests li span {
+    margin-right: 5px;
+}
+
+/* Entradas y botones */
+input, button, .custom-file-input label {
+    font-size: 14px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+input {
+    padding: 10px;
+    border: 1px solid #ddd;
+    color: #495057;
+}
+
+input:focus {
+    outline: none;
+    border-color: #28a745;
+    box-shadow: 0 0 5px rgba(40, 167, 69, 0.3);
+}
+
+.button-container, .logout-button, .edit-button, .save-button {
+    margin-top: 20px;
+}
+
+button, .logout-button, .custom-file-input label {
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    color: #fff;
+    background-color: #28a745;
+}
+
+button:hover, .custom-file-input label:hover, .logout-button:hover {
+    background-color: #218838;
+}
+
+.logout-button {
+    color: #dc3545;
+    background-color: transparent;
+    border: 1px solid #dc3545;
+}
+
+.logout-button:hover {
+    color: #fff;
+    background-color: #dc3545;
+}
+
+.custom-file-input label {
+    display: inline-block;
+    padding: 8px 12px;
+    background-color: #f9f9f9;
+    color: #333;
+    border: 1px solid #ccc;
+    margin-bottom: 15px;
+}
+
+.custom-file-input label:hover {
+    background-color: #e9f9e9;
+    border-color: #28a745;
+}
+
+input[readonly] {
+    background-color: #e9ecef; /* Fondo gris claro para destacar que es no editable */
+    color: #495057;
+    border: 1px solid #ddd;
+    cursor: not-allowed;
+}
+
+/* Espacio entre los campos del formulario */
+label {
+    margin: 5px; /* Margen entre campos */
+}
