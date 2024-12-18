@@ -19,28 +19,31 @@ const Calendario = () => {
 
   return (
     <div className="calendario-container">
-      <h2>Mi Calendario de Actividades</h2>
-      <div className="calendario">
-        <Calendar
-          onChange={setFechaSeleccionada}
-          value={fechaSeleccionada}
-        />
-      </div>
-      <div className="eventos-en-fecha">
-        <h3>Eventos en {fechaSeleccionada.toDateString()}</h3>
-        {eventosEnFecha.length > 0 ? (
-          eventosEnFecha.map((evento) => (
-            <div key={evento.id} className="evento-card">
-              <h4>{evento.titulo}</h4>
-              <p><strong>Ubicación:</strong> {evento.ubicacion}</p>
-              <p>{evento.descripcion}</p>
-            </div>
-          ))
-        ) : (
-          <p>No hay eventos en esta fecha.</p>
-        )}
-      </div>
+    {/* Calendario a la izquierda */}
+    <div className="calendario">
+      <Calendar
+        onChange={setFechaSeleccionada}
+        value={fechaSeleccionada}
+      />
     </div>
+
+    {/* Contenido de eventos a la derecha */}
+    <div className="eventos-en-fecha">
+      <h3>Eventos en {fechaSeleccionada.toDateString()}</h3>
+      {eventosEnFecha.length > 0 ? (
+        eventosEnFecha.map((evento) => (
+          <div key={evento.id} className="evento-card">
+            <h4>{evento.titulo}</h4>
+            <p><strong>Ubicación:</strong> {evento.ubicacion}</p>
+            <p>{evento.descripcion}</p>
+          </div>
+        ))
+      ) : (
+        <p>No hay eventos en esta fecha.</p>
+      )}
+  </div>
+</div>
+
   );
 };
 
