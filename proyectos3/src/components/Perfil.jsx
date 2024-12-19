@@ -7,25 +7,33 @@ const Perfil = () => {
   const navigate = useNavigate();
   const [userInfo, setUserInfo] = useState({});
   const [profilePic, setProfilePic] = useState(null);
-  const [tempProfilePic, setTempProfilePic] = useState(null); // Imagen temporal
+  const [tempProfilePic, setTempProfilePic] = useState(null);
+  const [isEditing, setIsEditing] = useState(false); // Modo edición
+  const [formData, setFormData] = useState({
+    username: '',
+    interests: { futbol: false, baloncesto: false, tenis: false, otros: false },
+  });
+
+  const interestIcons = {
+    futbol: '⚽',
+    baloncesto: '🏀',
+    tenis: '🎾',
+    otros: '⛳',
+  };
 
   useEffect(() => {
-    // Obtener usuario de las cookies
     const userCookie = Cookies.get('user');
-    console.log(userCookie)
     if (userCookie) {
       const user = JSON.parse(userCookie);
       setUserInfo(user);
-
-      // Buscar foto de perfil asociada al usuario en localStorage
+      setFormData({
+        username: user.username,
+        interests: user.interests || { futbol: false, baloncesto: false, tenis: false, otros: false },
+      });
       const profilePicKey = `profilePic_${user.username || user.email}`;
       const savedProfilePic = localStorage.getItem(profilePicKey);
-      console.log("Imagen cookies:", savedProfilePic)
-      if (savedProfilePic) {
-        setProfilePic(savedProfilePic);
-      }
+      if (savedProfilePic) setProfilePic(savedProfilePic);
     } else {
-      // Redirigir si no hay sesión
       navigate('/login');
     }
   }, [navigate]);
@@ -34,34 +42,52 @@ const Perfil = () => {
     const file = e.target.files[0];
     if (file) {
       const reader = new FileReader();
-      reader.onload = () => {
-        console.log('Imagen cargada:', reader.result);
-        setTempProfilePic(reader.result);
-      };
+      reader.onload = () => setTempProfilePic(reader.result);
       reader.readAsDataURL(file);
-    } else {
-      console.error('No se seleccionó un archivo válido.');
     }
   };
 
   const handleSaveChanges = () => {
-    if (tempProfilePic) {
-      setProfilePic(tempProfilePic);
+    const users = Cookies.get('users') ? JSON.parse(Cookies.get('users')) : [];
 
-      // Guardar foto de perfil asociada al usuario en localStorage
+    // Actualizamos al usuario en la lista general de usuarios
+    const updatedUsers = users.map((user) =>
+      user.email === userInfo.email
+        ? { ...user, username: formData.username, interests: formData.interests }
+        : user
+    );
+    Cookies.set('users', JSON.stringify(updatedUsers), { expires: 7 });
+
+    // Actualizamos la cookie de la sesión actual
+    const updatedUser = {
+      ...userInfo,
+      username: formData.username,
+      interests: formData.interests,
+    };
+    setUserInfo(updatedUser);
+    Cookies.set('user', JSON.stringify(updatedUser), { expires: 7 });
+
+    // Guardamos la foto de perfil si se modificó
+    if (tempProfilePic) {
       const profilePicKey = `profilePic_${userInfo.username || userInfo.email}`;
       localStorage.setItem(profilePicKey, tempProfilePic);
-
-      console.log(`Foto guardada para el usuario ${userInfo.username || userInfo.email}`);
+      setProfilePic(tempProfilePic);
       setTempProfilePic(null);
-      alert('¡Foto de perfil guardada con éxito!');
-    } else {
-      alert('Por favor, selecciona una imagen antes de guardar.');
     }
+
+    setIsEditing(false);
+    alert('Cambios guardados con éxito.');
+  };
+
+  const handleInterestChange = (e) => {
+    const { name, checked } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      interests: { ...prev.interests, [name]: checked },
+    }));
   };
 
   const handleLogout = () => {
-    // Eliminar cookies  relacionados con el usuario
     Cookies.remove('user');
     navigate('/login');
   };
@@ -72,35 +98,83 @@ const Perfil = () => {
       {tempProfilePic || profilePic ? (
         <img src={tempProfilePic || profilePic} alt="Foto de perfil" className="profile-pic" />
       ) : (
-        <div className="profile-pic-placeholder">Sin foto de perfil</div>
+        <div className="profile-pic-placeholder">Sin foto</div>
       )}
-      <input type="file" onChange={handleProfilePicChange} />
+
+      {isEditing && (
+        <div className="custom-file-input">
+          <label htmlFor="file-input">Modificar Foto</label>
+          <input
+            id="file-input"
+            type="file"
+            style={{ display: 'none' }}
+            onChange={handleProfilePicChange}
+          />
+        </div>
+      )}
 
       <div className="user-info">
-        <p><strong>Nombre de usuario:</strong> {userInfo.username}</p>
-        <p><strong>Correo electrónico:</strong> {userInfo.email}</p>
-        <p><strong>Ciudad:</strong> {userInfo.city}</p>
-        <p><strong>Intereses:</strong></p>
-        <ul>
-          {userInfo.interests &&
-            Object.keys(userInfo.interests).map((interest) =>
-              userInfo.interests[interest] ? (
-                <li key={interest}>
-                  {interest.charAt(0).toUpperCase() + interest.slice(1)}
-                </li>
-              ) : null
-            )}
-        </ul>
+        {isEditing ? (
+          <>
+            {/* Campo de nombre editable */}
+            <label>
+              <strong>Nombre:</strong>
+              <input
+                type="text"
+                value={formData.username}
+                onChange={(e) => setFormData({ ...formData, username: e.target.value })}
+              />
+            </label>
+
+            {/* Campo de correo solo lectura */}
+            <label>
+              <strong>Correo:</strong>
+              <input
+                type="text"
+                value={userInfo.email || 'correo@ejemplo.com'} /* Valor por defecto si no hay correo */
+                readOnly
+              />
+            </label>
+
+            {/* Intereses */}
+            <h4>Intereses</h4>
+            <div className="interests">
+              {Object.keys(interestIcons).map((interest) => (
+                <label key={interest}>
+                  <input
+                    type="checkbox"
+                    name={interest}
+                    checked={formData.interests[interest]}
+                    onChange={handleInterestChange}
+                  />
+                  {interestIcons[interest]} {interest.charAt(0).toUpperCase() + interest.slice(1)}
+                </label>
+              ))}
+            </div>
+          </>
+        ) : (
+          <>
+            <p><strong>Nombre:</strong> {userInfo.username}</p>
+            <p><strong>Correo:</strong> {userInfo.email}</p> {/* Mostrar correo al visualizar perfil */}
+            <div className="interests">
+              <ul>
+                {Object.entries(userInfo.interests || {}).map(([key, value]) =>
+                  value && <li key={key}>{interestIcons[key]} {key.charAt(0).toUpperCase() + key.slice(1)}</li>
+                )}
+              </ul>
+            </div>
+          </>
+        )}
       </div>
 
       <div className="button-container">
-        <button onClick={handleSaveChanges} className="save-button">
-          Guardar Cambios
-        </button>
-        <button onClick={handleLogout} className="logout-button">
-          Cerrar Sesión
-        </button>
+        {isEditing ? (
+          <button onClick={handleSaveChanges} className="save-button">Guardar Cambios</button>
+        ) : (
+          <button onClick={() => setIsEditing(true)} className="edit-button">Editar Perfil</button>
+        )}
       </div>
+      <button onClick={handleLogout} className="logout-button">Cerrar Sesión</button>
     </div>
   );
 };

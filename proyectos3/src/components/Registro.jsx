@@ -14,17 +14,15 @@ const Registro = () => {
     tenis: false,
     otros: false,
   });
-  const [errorMessages, setErrorMessages] = useState({}); // Nuevo estado para manejar los errores
+  const [errorMessages, setErrorMessages] = useState({});
   const [successMessage, setSuccessMessage] = useState('');
   const navigate = useNavigate();
 
+  const interestIcons = { futbol: '⚽', baloncesto: '🏀', tenis: '🎾', otros: '⛳' };
+
   const handleRegister = (e) => {
     e.preventDefault();
-
-    // Resetear mensajes de error
     setErrorMessages({});
-
-    // Verificamos si todos los campos están completos
     if (!username || !email || !password || !city) {
       setErrorMessages(prevState => ({
         ...prevState,
@@ -33,7 +31,6 @@ const Registro = () => {
       return;
     }
 
-    // Verificamos si el nombre de usuario ya existe
     const users = Cookies.get('users') ? JSON.parse(Cookies.get('users')) : [];
     const existingUsername = users.find(user => user.username === username);
     const existingEmail = users.find(user => user.email === email);
@@ -54,7 +51,6 @@ const Registro = () => {
       return;
     }
 
-    // Si todo es válido, registramos al nuevo usuario
     const newUser = {
       username,
       email,
@@ -65,14 +61,16 @@ const Registro = () => {
 
     users.push(newUser);
     Cookies.set('users', JSON.stringify(users), { expires: 7 });
-
     setSuccessMessage('Registro exitoso. Redirigiendo a inicio de sesión...');
     setTimeout(() => navigate('/login'), 2000);
   };
 
   const handleInterestChange = (e) => {
     const { name, checked } = e.target;
-    setInterests({ ...interests, [name]: checked });
+    setInterests((prevInterests) => ({
+      ...prevInterests,
+      [name]: checked,
+    }));
   };
 
   return (
@@ -86,7 +84,7 @@ const Registro = () => {
           onChange={(e) => setUsername(e.target.value)}
           required
         />
-        {errorMessages.username && <p className="error-message">{errorMessages.username}</p>} {/* Mensaje de error para el nombre de usuario */}
+        {errorMessages.username && <p className="error-message">{errorMessages.username}</p>}
 
         <input
           type="email"
@@ -95,7 +93,7 @@ const Registro = () => {
           onChange={(e) => setEmail(e.target.value)}
           required
         />
-        {errorMessages.email && <p className="error-message">{errorMessages.email}</p>} {/* Mensaje de error para el correo */}
+        {errorMessages.email && <p className="error-message">{errorMessages.email}</p>}
 
         <input
           type="password"
@@ -104,8 +102,6 @@ const Registro = () => {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-        {errorMessages.password && <p className="error-message">{errorMessages.password}</p>} {/* Mensaje de error para la contraseña */}
-
         <input
           type="text"
           placeholder="Ciudad"
@@ -113,50 +109,25 @@ const Registro = () => {
           onChange={(e) => setCity(e.target.value)}
           required
         />
-        {errorMessages.city && <p className="error-message">{errorMessages.city}</p>} {/* Mensaje de error para la ciudad */}
 
         <h4>Intereses</h4>
         <div className="interests">
-          <label>
-            <input
-              type="checkbox"
-              name="futbol"
-              checked={interests.futbol}
-              onChange={handleInterestChange}
-            />
-            Fútbol
-          </label>
-          <label>
-            <input
-              type="checkbox"
-              name="baloncesto"
-              checked={interests.baloncesto}
-              onChange={handleInterestChange}
-            />
-            Baloncesto
-          </label>
-          <label>
-            <input
-              type="checkbox"
-              name="tenis"
-              checked={interests.tenis}
-              onChange={handleInterestChange}
-            />
-            Tenis
-          </label>
-          <label>
-            <input
-              type="checkbox"
-              name="otros"
-              checked={interests.otros}
-              onChange={handleInterestChange}
-            />
-            Otros
-          </label>
+          {Object.keys(interestIcons).map(interest => (
+            <label key={interest} className={`interest ${interests[interest] ? 'selected' : ''}`}>
+              <input
+                type="checkbox"
+                name={interest}
+                checked={interests[interest]}
+                onChange={handleInterestChange}
+              />
+              <span className="icon">{interestIcons[interest]}</span>
+              <span className="text">{interest.charAt(0).toUpperCase() + interest.slice(1)}</span>
+            </label>
+          ))}
         </div>
 
         <button type="submit">Registrarse</button>
-        {errorMessages.general && <p className="error-message">{errorMessages.general}</p>} {/* Mensaje de error general */}
+        {errorMessages.general && <p className="error-message">{errorMessages.general}</p>}
         {successMessage && <p className="registro-message">{successMessage}</p>}
       </form>
     </div>
