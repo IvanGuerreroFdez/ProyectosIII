@@ -4,7 +4,7 @@
     justify-content: center; /* Centrar horizontalmente */
     align-items: center; /* Centrar verticalmente */
     padding: 20px;
-    min-height: 100vh; /* Asegura que ocupe toda la altura de la pantalla */
+    min-height: 70vh; /* Asegura que ocupe toda la altura de la pantalla */
     position: relative;
 }
 

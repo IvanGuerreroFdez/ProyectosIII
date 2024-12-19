@@ -69,11 +69,13 @@
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
+    color: #333; /* Asegura un color oscuro por defecto para texto */
+    background-color: transparent; /* Fondo transparente para días normales */
 }
 
 .calendario .react-calendar__tile--active {
-    background-color: #002aff;
-    color: white;
+    background-color: transparent;
+    color: #333;
 }
 
 .calendario .react-calendar__tile--now {

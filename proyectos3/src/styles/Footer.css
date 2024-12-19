@@ -1,0 +1,32 @@
+.footer {
+    margin-top: auto; /* Empuja el footer hacia abajo */
+    background-color: #1e1c61;
+    padding: 1rem;
+    text-align: center;
+    width: 100%;
+    color: white;
+    box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.1);
+}   
+  
+  .footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .footer-link {
+    color: #ffffff;
+    text-decoration: none;
+  }
+  
+  .footer-link:hover {
+    text-decoration: underline;
+  }
+  
+  .footer-copyright {
+    font-size: 0.9rem;
+    color: #ffffff;
+  }
+  
