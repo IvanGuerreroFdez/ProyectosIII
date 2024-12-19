@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import '../styles/HomePage.css';
+import '../styles/Noticias.css'; // Añadimos los estilos para las noticias
+import noticias from '../components/Noticias.json'; // Importamos el JSON de noticias
 
 const HomePage = ({ eventos }) => {
     const [eventosPopulares, setEventosPopulares] = useState([]);
@@ -41,6 +43,23 @@ const HomePage = ({ eventos }) => {
                         ya sea para entrenar, competir, o simplemente disfrutar de tu disciplina favorita.
                         ¡Únete a nuestra comunidad y haz del deporte una experiencia compartida!
                     </p>
+                </div>
+            </div>
+
+            {/* Sección de noticias */}
+            <div className="noticias">
+                <h3>Últimas Noticias Deportivas</h3>
+                <div className="noticias-grid">
+                    {noticias.map((noticia, index) => (
+                        <div key={index} className="noticia-card">
+                            <img src={noticia.imagen} alt={noticia.titulo} className="noticia-imagen" />
+                            <h4>{noticia.titulo}</h4>
+                            <p>{noticia.resumen}</p>
+                            <a href={noticia.url} target="_blank" rel="noopener noreferrer">
+                                Leer más
+                            </a>
+                        </div>
+                    ))}
                 </div>
             </div>
         </div>

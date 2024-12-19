@@ -1,3 +1,4 @@
+/* Contenedor principal */
 .home-container {
     display: flex;
     justify-content: center; /* Centrar horizontalmente */
@@ -7,6 +8,7 @@
     position: relative;
 }
 
+/* Descripción central */
 .descripcion {
     background-color: #ffffff; /* Fondo blanco elegante */
     padding: 30px;
@@ -83,3 +85,73 @@
     border-bottom: none; /* Eliminar el borde del último elemento */
 }
 
+/* Noticias */
+.noticias {
+    position: absolute; /* Se posiciona en el lado derecho */
+    top: 50%; /* Centrar verticalmente */
+    right: 20px; /* Espaciado desde el borde derecho */
+    transform: translateY(-50%); /* Ajuste para centrar perfectamente */
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Sombra más prominente */
+    max-width: 300px;
+    text-align: left; /* Alineación del texto */
+    border: 1px solid #ddd;
+}
+
+.noticias h3 {
+    font-size: 18px;
+    font-weight: bold;
+    text-align: left;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.noticias-grid {
+    display: flex;
+    flex-direction: column; /* Coloca las noticias en filas */
+    gap: 10px; /* Espacio entre cada noticia */
+}
+
+.noticia-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px; /* Espaciado entre la imagen y el texto */
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+}
+
+.noticia-imagen {
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
+    object-fit: cover;
+}
+
+.noticia-card h4 {
+    font-size: 1rem;
+    margin: 0;
+    color: #333;
+}
+
+.noticia-card p {
+    font-size: 0.8rem;
+    color: #666;
+    margin: 0;
+    line-height: 1.2;
+}
+
+.noticia-card a {
+    font-size: 0.8rem;
+    color: #007bff;
+    text-decoration: none;
+    margin-top: 5px;
+}
+
+.noticia-card a:hover {
+    text-decoration: underline;
+}
